@@ -7,13 +7,19 @@ var Question = function(question, answer, hint, theory) {
 
 var CurrentQuestionView = function() {
     this.Question = ko.observable(new Question("","",""));
+    this.unit = ko.observable("");
+
+    this.setUnit = function(unit) {
+        console.log(unit);
+        this.unit(unit);
+    }
 
     this.eval = function() {
         console.log("evaluating answer");
         var answer = document.getElementById("antwoord").value;
-        console.log(answer+"ml" +" == "+this.Question().answer);
-        console.log(answer+"ml" == this.Question().answer.trim());
-        if(answer+"ml" == this.Question().answer.trim()) {
+        console.log(answer+this.unit() +" == "+this.Question().answer);
+        console.log(answer+this.unit() == this.Question().answer.trim());
+        if(answer+this.unit() == this.Question().answer.trim()) {
             $("#correct").modal();
         }
         else

@@ -45,7 +45,23 @@
                 <h1 data-bind="text: currentQuestionView.Question().theory"></h1>
                 <p data-bind="text: currentQuestionView.Question().question"></p>
                 <form class="well form-inline">
-                  <input type="text" class="input-small" id="antwoord" placeholder="">
+                    <div class="input-append input-prepend">
+                        <div class="btn-group">
+                            <button class="btn dropdown-toggle" data-toggle="dropdown">
+                                Eenheid
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li onclick="currentQuestionView.setUnit('ml')"><a href="#">Milliliter</a></li>
+                                <li onclick="currentQuestionView.setUnit('cl')"><a href="#">Centiliter</a></li>
+                                <li onclick="currentQuestionView.setUnit('dl')"><a href="#">Deciliter</a></li>
+                                <li onclick="currentQuestionView.setUnit('druppels')"><a href="#">Druppels</a></li>
+                            </ul>
+                        </div>
+                        <input type="text" class="input-small" id="antwoord" placeholder="">
+                        <span class="add-on" data-bind="text: currentQuestionView.unit()">.00</span>
+
+                    </div>
                 <button type="submit" class="btn btn-success" data-toggle="modal" id="antwoordButton">Antwoord</button>
                 </form>
             </div>
