@@ -18,6 +18,7 @@ var api_url = "http://172.16.1.106/MR/Api/api/";
  */
 var callService = function(uri, successFunction) {
     "use strict";
+    "doing ajax call";
     $.ajax({
         cache: true,
         url: api_url + uri,
@@ -59,3 +60,18 @@ var ajaxError = function(data) {
     console.log(data.getAllResponseHeaders());
     /* END DEBUG CODE */
 };
+
+var getQuestion = function(type) {
+    console.log("Getting question");
+    this.callService("question/"+type, getQuestionSuccess);
+}
+
+var getQuestionSuccess = function(data) {
+    console.log(data)
+    if(data !== null) {
+        var obj = $.parseJSON(data);
+        var q = new Question(obj.question, obj.answer, obj.hint, obj.theory);
+        console.log(q);
+        currentQuestionView.Question(q);
+    }
+}
