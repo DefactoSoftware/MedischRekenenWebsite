@@ -8,7 +8,7 @@
         <meta name="author" content="">
         <!-- Le styles -->
         <link href="twitter-bootstrap-v2/docs/assets/css/bootstrap.css" rel="stylesheet">
-        <link href="twitter-bootstrap-v2/docs/assets/css/example-fixed-layout.css" rel="stylesheet">
+        <link href="twitter-bootstrap-v2/docs/assets/css/bootstrap-responsive.css" rel="stylesheet">
         <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
         <!--[if lt IE 9]>
         <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -20,7 +20,7 @@
         <link rel="apple-touch-icon" sizes="114x114" href="twitter-bootstrap-v2/docs/examples/images/apple-touch-icon-114x114.png">
     </head>
     <body>
-        <div class="navbar navbar-fixed-top">
+        <div class="navbar">
             <div class="navbar-inner">
                 <div class="container">
                     <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -39,8 +39,8 @@
             </div>
         </div>
 
-        <div class="container">
-            <!-- Main hero unit for a primary marketing message or call to action -->
+        <div class="container container-fluid">
+            <!-- Main question unit -->
             <div class="leaderboard" id="currentQuestion">
                 <h1 data-bind="text: currentQuestionView.Question().theory"></h1>
                 <p data-bind="text: currentQuestionView.Question().question"></p>
@@ -72,6 +72,7 @@
                 <button id="skipButton" onclick="getQuestion(1)" type="submit" class="btn btn-danger">Overslaan</button>
             </div>
         </div>
+		<!-- Correct Modal -->
         <div id="correct" class="modal hide fade in" style="display: none; ">
             <div class="modal-header">
                 <a class="close" data-dismiss="modal"><i class=" icon-remove-circle "></i></a>
@@ -86,7 +87,7 @@
                 <a data-dismiss="modal" id="continueTrueButton" class="btn btn-success">Ga verder</a>
             </div>
         </div>
-
+		<!-- False Modal -->
         <div id="false" class="modal hide fade in" style="display: none; ">
             <div class="modal-header">
                 <a class="close" data-dismiss="modal"><i class=" icon-remove-circle "></i></a>
@@ -101,7 +102,7 @@
                 <a data-dismiss="modal" id="continueFalseButton" class="btn btn-danger">Ga verder</a>
             </div>
         </div>
-
+		<!-- Hint Modal -->
         <div id="hint" class="modal hide fade in" style="display: none; ">
             <div class="modal-header">
                 <a class="close" data-dismiss="modal"><i class=" icon-remove-circle "></i></a>
@@ -129,7 +130,6 @@
     <script src="js/ApiCalls.js"></script>
     <script src="js/Functions.js"></script>
     <script>getQuestion(1);</script>
-    ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="twitter-bootstrap-v2/docs/assets/js/jquery.js"></script>
     <script src="twitter-bootstrap-v2/docs/assets/js/bootstrap-transition.js"></script>
