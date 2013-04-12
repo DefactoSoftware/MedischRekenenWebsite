@@ -1,0 +1,127 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+<meta name="viewport" content="width=device-width, initial-scale=1.0">  
+<title>Medisch Rekenen Arcade MockUp</title>  
+<meta name="viewport" content="width=device-width, initial-scale=1.0">  
+<meta name="author" content="">  
+<!-- Le styles -->  
+<link href="twitter-bootstrap-v2/docs/assets/css/bootstrap.css" rel="stylesheet">  
+<link href="twitter-bootstrap-v2/docs/assets/css/bootstrap-responsive.css" rel="stylesheet"> 
+<!-- orange heading is always better -->
+<style type="text/css">
+h1 {
+   color:#ffa800;
+}
+</style> 
+<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->  
+<!--[if lt IE 9]>  
+<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>  
+<![endif]-->  
+<!-- Le fav and touch icons, geen idee wat dit doet -->  
+<link rel="shortcut icon" href="twitter-bootstrap-v2/docs/examples/images/favicon.ico">  
+<link rel="apple-touch-icon" href="twitter-bootstrap-v2/docs/examples/images/apple-touch-icon.png">  
+<link rel="apple-touch-icon" sizes="72x72" href="twitter-bootstrap-v2/docs/examples/images/apple-touch-icon-72x72.png">  
+<link rel="apple-touch-icon" sizes="114x114" href="twitter-bootstrap-v2/docs/examples/images/apple-touch-icon-114x114.png">  
+</head>  
+<body>  
+<div class="navbar">  
+<div class="navbar-inner">  
+<div class="container container-fluid" width="100%">  
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">  
+<span class="icon-bar"></span>  
+<span class="icon-bar"></span>  
+<span class="icon-bar"></span>  
+</a>  
+<!-- <a class="brand" href="#"><img src="/images/w3r.png" width="111" height="30" alt="w3resource logo" /></a>  -->
+<div class="nav-collapse">  
+<ul class="nav">  
+<li><a href="#"><i class="icon-arrow-left"></i> Overzicht</a></li>  
+<li class="active"><a href="#"><i class="icon-filter"></i> Medisch Rekenen - Oplossingen Level 3</a></li>  
+</ul>  
+</div><!--/.nav-collapse -->  
+</div>  
+</div>  
+</div>  
+<div class="container">  
+<!-- question -->  
+<div class="leaderboard">  
+<h1>Bereken het juiste aantal druppels per minuut</h1>  
+<p>Aan een pati&#235;nt met een lichaamsgewicht van 85 kg moet per intraveneus infuus, 7 ml Aminess per kg lichaamsgewicht in 5 uur worden toegediend.</p>  
+<p><b>Hoeveel druppels geef je per minuut?</b></p>
+<!-- answer submit form -->  
+<form class="well form-inline">  
+<div class="line">
+<div class="input">
+  <input type="text" class="input-small" width="100%" placeholder=""> 
+</div>
+</div>
+<button type="submit" class="btn btn-success" data-toggle="modal" href="#correct">Druppels per minuut</button>
+</form>
+
+</div>
+</div>
+</div>  
+<!-- secondary actions -->  
+<a data-toggle="modal" href="#hint"><button class="btn btn-warning"><i class="icon-question-sign icon-white"></i><b> Hint</b></button></a> 
+<div class="pull-right"><a href="index2.html"><button type="submit" class="btn btn-danger">Overslaan</button></a></div>
+</div>  
+<!-- Modal for correct answer -->  
+<div id="correct" class="modal hide fade in" style="display: none; ">  
+<div class="modal-header">  
+<a class="close" data-dismiss="modal"><i class=" icon-remove-circle "></i></a>  
+<h3>Dat klopt</h3>  
+</div>  
+<div class="modal-body">  
+<p>Je moet de patient 40 druppels per minuut geven:</p>                
+<p>7x85 = 595 ml per 5 uur</p>
+<p>595/5 = 119 ml per uur</p>
+<p>119/60 = 1,98 ml per minuut</p>
+<p>1,98x20 = 40 druppels per minuut</p>
+</div>  
+<div class="modal-footer">  
+<a href="index2.html" class="btn btn-success">Ga verder</a>  
+</div>  
+</div>  
+<!-- Modal for hint -->  
+<div id="hint" class="modal hide fade in" style="display: none; ">  
+<div class="modal-header">  
+<a class="close" data-dismiss="modal"><i class=" icon-remove-circle "></i></a>  
+<h3>Hint</h3>  
+</div>  
+<div class="modal-body">  
+<p>Bereken eerst hoeveel ml de pati&#235;nt in totaal moet krijgen.</p>                
+<p>Reken vervolgens van 5 uur terug naar 1 uur, en vervolgens naar 1 minuut</p>
+<p>Je hoeft dan alleen nog van ml naar duppels om te rekenen!</p>
+</div>  
+<div class="modal-footer">  
+<a href="#" class="btn btn-warning" data-dismiss="modal">Ga verder</a>  
+</div>  
+</div>  
+</div>  
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
+<script src="/twitter-bootstrap/twitter-bootstrap-v2/js/bootstrap-modal.js"></script>  
+<hr>  
+<footer>  
+<p>copyright defacto 2013</p>  
+</footer>  
+</div> <!-- /container -->  
+<!-- Le javascript  
+================================================== -->  
+<!-- Placed at the end of the document so the pages load faster -->  
+<script src="twitter-bootstrap-v2/docs/assets/js/jquery.js"></script>  
+<script src="twitter-bootstrap-v2/docs/assets/js/bootstrap-transition.js"></script>  
+<script src="twitter-bootstrap-v2/docs/assets/js/bootstrap-alert.js"></script>  
+<script src="twitter-bootstrap-v2/docs/assets/js/bootstrap-modal.js"></script>  
+<script src="twitter-bootstrap-v2/docs/assets/js/bootstrap-dropdown.js"></script>  
+<script src="twitter-bootstrap-v2/docs/assets/js/bootstrap-scrollspy.js"></script>  
+<script src="twitter-bootstrap-v2/docs/assets/js/bootstrap-tab.js"></script>  
+<script src="twitter-bootstrap-v2/docs/assets/js/bootstrap-tooltip.js"></script>  
+<script src="twitter-bootstrap-v2/docs/assets/js/bootstrap-popover.js"></script>  
+<script src="twitter-bootstrap-v2/docs/assets/js/bootstrap-button.js"></script>  
+<script src="twitter-bootstrap-v2/docs/assets/js/bootstrap-collapse.js"></script>  
+<script src="twitter-bootstrap-v2/docs/assets/js/bootstrap-carousel.js"></script>  
+<script src="twitter-bootstrap-v2/docs/assets/js/bootstrap-typeahead.js"></script>  
+</body>  
+</html>  
+              
