@@ -1,108 +1,120 @@
 <!DOCTYPE html>  
 <html lang="en">  
-<head>  
-<meta charset="utf-8">  
-<title>Medisch Rekenen Arcade MockUp</title>  
-<meta name="viewport" content="width=device-width, initial-scale=1.0">  
-<meta name="description" content="Example of Fixed Layout with Twitter Bootstrap version 2.0 from w3resource.com">  
-<meta name="author" content="">  
-<!-- Le styles -->  
-<link href="twitter-bootstrap-v2/docs/assets/css/bootstrap.css" rel="stylesheet">  
-<link href="twitter-bootstrap-v2/docs/assets/css/example-fixed-layout.css" rel="stylesheet">  
-<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->  
-<!--[if lt IE 9]>  
-<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>  
-<![endif]-->  
-<!-- Le fav and touch icons -->  
-<link rel="shortcut icon" href="twitter-bootstrap-v2/docs/examples/images/favicon.ico">  
-<link rel="apple-touch-icon" href="twitter-bootstrap-v2/docs/examples/images/apple-touch-icon.png">  
-<link rel="apple-touch-icon" sizes="72x72" href="twitter-bootstrap-v2/docs/examples/images/apple-touch-icon-72x72.png">  
-<link rel="apple-touch-icon" sizes="114x114" href="twitter-bootstrap-v2/docs/examples/images/apple-touch-icon-114x114.png">  
-</head>  
-<body>  
-<div class="navbar navbar-fixed-top">  
-<div class="navbar-inner">  
-<div class="container">  
-<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">  
-<span class="icon-bar"></span>  
-<span class="icon-bar"></span>  
-<span class="icon-bar"></span>  
-</a>  
-<!-- <a class="brand" href="#"><img src="/images/w3r.png" width="111" height="30" alt="w3resource logo" /></a>  -->
-<div class="nav-collapse">  
-<ul class="nav">  
-<li><a href="#"><i class="icon-arrow-left"></i> Overzicht</a></li>  
-<li class="active"><a href="#">Medisch Rekenen - Injecties Level 2</a></li>  
-</ul>  
-</div><!--/.nav-collapse -->  
-</div>  
-</div>  
-</div>  
-<div class="container">  
-<!-- Main hero unit for a primary marketing message or call to action -->  
-<div class="leaderboard">  
-<h1>Hoeveel ml injecteer je?</h1>  
-<p>Een pati&#235;nt dient een intramusculaire injectie te krijgen met 300 mcg Hydrocobamine. In voorraad zijn ampullen a 1.000 mcg/2 ml. </p>  
-<p><b>Hoeveel ml Hydrocobamine injecteer je? </b></p>
-<form class="well form-inline">  
-  <input type="text" class="input-small" placeholder=""> 
-<button type="submit" class="btn btn-success" data-toggle="modal" href="#correct">ml</button>
-</form>
-</div>  
-<a data-toggle="modal" href="#hint"><button class="btn btn-warning"><i class="icon-question-sign icon-white"></i><b> Hint</b></button></a> 
-<div class="pull-right"><a href="index.html"><button type="submit" class="btn btn-danger">Overslaan</button></a></div>
-</div>  
-<div id="correct" class="modal hide fade in" style="display: none; ">  
-<div class="modal-header">  
-<a class="close" data-dismiss="modal"><i class=" icon-remove-circle "></i></a>  
-<h3>Dat klopt</h3>  
-</div>  
-<div class="modal-body">  
-<p>Je moet 0,6 ml injecteren</p>                
-<p>(300/1000) x 2ml = 0,6 ml</p>
-</div>  
-<div class="modal-footer">  
-<a href="index.html" class="btn btn-success">Ga verder</a>  
-</div>  
-</div>  
-<div id="hint" class="modal hide fade in" style="display: none; ">  
-<div class="modal-header">  
-<a class="close" data-dismiss="modal"><i class=" icon-remove-circle "></i></a>  
-<h3>Hint</h3>  
-</div>  
-<div class="modal-body">  
-<p>Bereken eerst welk deel van de werkzame stof in de ampul je moet gebruiken</p>
-<p>Reken dit vervolgens om naar ml</p>
+    <head>
+        <meta charset="utf-8">
+        <title>Medisch Rekenen Arcade MockUp</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Example of Fixed Layout with Twitter Bootstrap version 2.0 from w3resource.com">
+        <meta name="author" content="">
+        <!-- Le styles -->
+        <link href="twitter-bootstrap-v2/docs/assets/css/bootstrap.css" rel="stylesheet">
+        <link href="twitter-bootstrap-v2/docs/assets/css/example-fixed-layout.css" rel="stylesheet">
+        <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+        <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <!-- Le fav and touch icons -->
+        <link rel="shortcut icon" href="twitter-bootstrap-v2/docs/examples/images/favicon.ico">
+        <link rel="apple-touch-icon" href="twitter-bootstrap-v2/docs/examples/images/apple-touch-icon.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="twitter-bootstrap-v2/docs/examples/images/apple-touch-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="twitter-bootstrap-v2/docs/examples/images/apple-touch-icon-114x114.png">
+    </head>
+    <body>
+        <div class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    </a>
+                    <!-- <a class="brand" href="#"><img src="/images/w3r.png" width="111" height="30" alt="w3resource logo" /></a>  -->
+                    <div class="nav-collapse">
+                        <ul class="nav">
+                        <li><a href="#"><i class="icon-arrow-left"></i> Overzicht</a></li>
+                        <li class="active"><a href="#">Medisch Rekenen - Injecties Level 2</a></li>
+                        </ul>
+                    </div><!--/.nav-collapse -->
+                </div>
+            </div>
+        </div>
 
-</div>  
-<div class="modal-footer">  
-<a href="#" class="btn btn-warning" data-dismiss="modal">Ga verder</a>  
-</div>  
-</div>  
-</div>  
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
-<script src="/twitter-bootstrap/twitter-bootstrap-v2/js/bootstrap-modal.js"></script>  
-<hr>  
-<footer>  
-<p>copyright defacto 2013</p>  
-</footer>  
-</div> <!-- /container -->  
-<!-- Le javascript  
-================================================== -->  
-<!-- Placed at the end of the document so the pages load faster -->  
-<script src="twitter-bootstrap-v2/docs/assets/js/jquery.js"></script>  
-<script src="twitter-bootstrap-v2/docs/assets/js/bootstrap-transition.js"></script>  
-<script src="twitter-bootstrap-v2/docs/assets/js/bootstrap-alert.js"></script>  
-<script src="twitter-bootstrap-v2/docs/assets/js/bootstrap-modal.js"></script>  
-<script src="twitter-bootstrap-v2/docs/assets/js/bootstrap-dropdown.js"></script>  
-<script src="twitter-bootstrap-v2/docs/assets/js/bootstrap-scrollspy.js"></script>  
-<script src="twitter-bootstrap-v2/docs/assets/js/bootstrap-tab.js"></script>  
-<script src="twitter-bootstrap-v2/docs/assets/js/bootstrap-tooltip.js"></script>  
-<script src="twitter-bootstrap-v2/docs/assets/js/bootstrap-popover.js"></script>  
-<script src="twitter-bootstrap-v2/docs/assets/js/bootstrap-button.js"></script>  
-<script src="twitter-bootstrap-v2/docs/assets/js/bootstrap-collapse.js"></script>  
-<script src="twitter-bootstrap-v2/docs/assets/js/bootstrap-carousel.js"></script>  
-<script src="twitter-bootstrap-v2/docs/assets/js/bootstrap-typeahead.js"></script>  
+        <div class="container">
+            <!-- Main hero unit for a primary marketing message or call to action -->
+            <div class="leaderboard">
+                <h1>Hoeveel ml injecteer je?</h1>
+                <p>Een pati&#235;nt dient een intramusculaire injectie te krijgen met 300 mcg Hydrocobamine. In voorraad zijn ampullen a 1.000 mcg/2 ml. </p>
+                <p><b>Hoeveel ml Hydrocobamine injecteer je? </b></p>
+                <form class="well form-inline">
+                  <input type="text" class="input-small" placeholder="">
+                <button type="submit" class="btn btn-success" data-toggle="modal" href="#correct">ml</button>
+                </form>
+            </div>
+
+            <a data-toggle="modal" href="#hint"><button class="btn btn-warning"><i class="icon-question-sign icon-white"></i><b> Hint</b></button></a>
+
+            <div class="pull-right">
+                <a href="index.html">
+                    <button type="submit" class="btn btn-danger">Overslaan</button>
+                </a>
+            </div>
+        </div>
+        <div id="correct" class="modal hide fade in" style="display: none; ">
+            <div class="modal-header">
+                <a class="close" data-dismiss="modal"><i class=" icon-remove-circle "></i></a>
+                <h3>Dat klopt</h3>
+            </div>
+
+            <div class="modal-body">
+                <p>Je moet 0,6 ml injecteren</p>
+                <p>(300/1000) x 2ml = 0,6 ml</p>
+            </div>
+
+            <div class="modal-footer">
+                <a href="index.html" class="btn btn-success">Ga verder</a>
+            </div>
+        </div>
+
+        <div id="hint" class="modal hide fade in" style="display: none; ">
+            <div class="modal-header">
+                <a class="close" data-dismiss="modal"><i class=" icon-remove-circle "></i></a>
+                <h3>Hint</h3>
+            </div>
+
+            <div class="modal-body">
+                <p>Bereken eerst welk deel van de werkzame stof in de ampul je moet gebruiken</p>
+                <p>Reken dit vervolgens om naar ml</p>
+            </div>
+
+            <div class="modal-footer">
+                <a href="#" class="btn btn-warning" data-dismiss="modal">Ga verder</a>
+            </div>
+        </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="/twitter-bootstrap/twitter-bootstrap-v2/js/bootstrap-modal.js"></script>
+    <hr>
+    <footer>
+    <p>copyright defacto 2013</p>
+    </footer>
+    <!-- Le javascript -->
+    <script src="http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js"></script>
+    <script src="js/Models.js"></script>
+    <script src="js/ApiCalls.js"></script>
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="twitter-bootstrap-v2/docs/assets/js/jquery.js"></script>
+    <script src="twitter-bootstrap-v2/docs/assets/js/bootstrap-transition.js"></script>
+    <script src="twitter-bootstrap-v2/docs/assets/js/bootstrap-alert.js"></script>
+    <script src="twitter-bootstrap-v2/docs/assets/js/bootstrap-modal.js"></script>
+    <script src="twitter-bootstrap-v2/docs/assets/js/bootstrap-dropdown.js"></script>
+    <script src="twitter-bootstrap-v2/docs/assets/js/bootstrap-scrollspy.js"></script>
+    <script src="twitter-bootstrap-v2/docs/assets/js/bootstrap-tab.js"></script>
+    <script src="twitter-bootstrap-v2/docs/assets/js/bootstrap-tooltip.js"></script>
+    <script src="twitter-bootstrap-v2/docs/assets/js/bootstrap-popover.js"></script>
+    <script src="twitter-bootstrap-v2/docs/assets/js/bootstrap-button.js"></script>
+    <script src="twitter-bootstrap-v2/docs/assets/js/bootstrap-collapse.js"></script>
+    <script src="twitter-bootstrap-v2/docs/assets/js/bootstrap-carousel.js"></script>
+    <script src="twitter-bootstrap-v2/docs/assets/js/bootstrap-typeahead.js"></script>
 </body>  
 </html>  
               
