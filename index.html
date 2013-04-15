@@ -9,6 +9,7 @@
         <!-- Le styles -->
         <link href="twitter-bootstrap-v2/docs/assets/css/bootstrap.css" rel="stylesheet">
         <link href="twitter-bootstrap-v2/docs/assets/css/bootstrap-responsive.css" rel="stylesheet">
+        <link href="customstyle.css" rel="stylesheet">
         <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
         <!--[if lt IE 9]>
         <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -31,105 +32,51 @@
                     <!-- <a class="brand" href="#"><img src="/images/w3r.png" width="111" height="30" alt="w3resource logo" /></a>  -->
                     <div class="nav-collapse">
                         <ul class="nav">
-                        <li><a href="#"><i class="icon-arrow-left"></i> Overzicht</a></li>
-                        <li class="active"><a href="#">Medisch Rekenen - Injecties Level 2</a></li>
+                        <li>
+                            <a onclick="loadDiv('Home')" href="#">
+                                <i class="icon-arrow-left"></i> Home
+                            </a>
+                        </li>
+                        <li><a onclick='loadDiv("Question")' href="#">Medisch Rekenen</a></li>
                         </ul>
                     </div><!--/.nav-collapse -->
                 </div>
             </div>
         </div>
 
-        <div class="container container-fluid">
-            <!-- Main question unit -->
-            <div class="leaderboard" id="currentQuestion">
-                <h1 data-bind="text: currentQuestionView.Question().theory"></h1>
-                <p data-bind="text: currentQuestionView.Question().question"></p>
-                <form class="well form-inline">
-                    <div class="input-append input-prepend">
-                        <div class="btn-group">
-                            <button class="btn dropdown-toggle" data-toggle="dropdown">
-                                Eenheid
-                                <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li onclick="currentQuestionView.setUnit('ml')"><a href="#">Milliliter</a></li>
-                                <li onclick="currentQuestionView.setUnit('cl')"><a href="#">Centiliter</a></li>
-                                <li onclick="currentQuestionView.setUnit('dl')"><a href="#">Deciliter</a></li>
-                                <li onclick="currentQuestionView.setUnit('druppels')"><a href="#">Druppels</a></li>
-                            </ul>
-                        </div>
-                        <input type="text" class="input-small" id="antwoord" placeholder="">
-                        <span class="add-on" data-bind="text: currentQuestionView.unit()">.00</span>
-
-                    </div>
-                <button type="submit" class="btn btn-success" data-toggle="modal" id="antwoordButton">Antwoord</button>
-                </form>
-            </div>
-
-            <a data-toggle="modal" href="#hint"><button class="btn btn-warning"><i class="icon-question-sign icon-white"></i><b> Hint</b></button></a>
-
-            <div class="pull-right">
-                <button id="skipButton" onclick="getQuestion(1)" type="submit" class="btn btn-danger">Overslaan</button>
-            </div>
-        </div>
-		<!-- Correct Modal -->
-        <div id="correct" class="modal hide fade in" style="display: none; ">
-            <div class="modal-header">
-                <a class="close" data-dismiss="modal"><i class=" icon-remove-circle "></i></a>
-                <h3>Dat klopt</h3>
-            </div>
-
-            <div class="modal-body">
-                <p>Je moet <span data-bind="text: currentQuestionView.Question().answer"></span> injecteren</p>
-            </div>
-
-            <div class="modal-footer">
-                <a data-dismiss="modal" id="continueTrueButton" class="btn btn-success">Ga verder</a>
-            </div>
-        </div>
-		<!-- False Modal -->
-        <div id="false" class="modal hide fade in" style="display: none; ">
-            <div class="modal-header">
-                <a class="close" data-dismiss="modal"><i class=" icon-remove-circle "></i></a>
-                <h3>Dat is fout...</h3>
-            </div>
-
-            <div class="modal-body">
-                <p>Je moet <span data-bind="text: currentQuestionView.Question().answer"></span> injecteren</p>
-            </div>
-
-            <div class="modal-footer">
-                <a data-dismiss="modal" id="continueFalseButton" class="btn btn-danger">Ga verder</a>
-            </div>
-        </div>
-		<!-- Hint Modal -->
-        <div id="hint" class="modal hide fade in" style="display: none; ">
-            <div class="modal-header">
-                <a class="close" data-dismiss="modal"><i class=" icon-remove-circle "></i></a>
-                <h3>Hint</h3>
-            </div>
-
-            <div class="modal-body">
-                <p data-bind="text: currentQuestionView.Question().hint">Bereken eerst welk deel van de werkzame stof in de ampul je moet gebruiken</p>
-
-            </div>
-
-            <div class="modal-footer">
-                <a href="#" class="btn btn-warning" data-dismiss="modal">Ga verder</a>
-            </div>
+        <div id="content">
+            loading....
         </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 
     <hr>
-    <footer>
-    <p>copyright defacto 2013</p>
+    <footer class="container-fluid">
+    <p>© Copyright 2013</p>
+        <div >
+            <img width="100%"src="img/FOOTER.png" />
+        </div>
+    <address>
+        <div class="pull-left">
+        <strong>Defacto Software BV</strong><br>
+        Zuiderpark 3<br>
+        9724 AD Groningen<br><br>
+        </div>
+        <div class="pull-right">
+            <abbr title="Phone">P:</abbr> ++31 (0)50 3144832<br>
+            <abbr title="Fax">F:</abbr> ++31 (0)50 3186332 <br>
+            <abbr title="Mail">E:</abbr> info@defacto.nl<br>
+        </div>
+    </address>
+
     </footer>
     <!-- Le javascript -->
+    <script src="http://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
     <script src="http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js"></script>
     <script src="js/Models.js"></script>
     <script src="js/ApiCalls.js"></script>
-    <script src="js/Functions.js"></script>
-    <script>getQuestion(1);</script>
+
+
+
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="twitter-bootstrap-v2/docs/assets/js/jquery.js"></script>
     <script src="twitter-bootstrap-v2/docs/assets/js/bootstrap-transition.js"></script>
@@ -144,6 +91,16 @@
     <script src="twitter-bootstrap-v2/docs/assets/js/bootstrap-collapse.js"></script>
     <script src="twitter-bootstrap-v2/docs/assets/js/bootstrap-carousel.js"></script>
     <script src="twitter-bootstrap-v2/docs/assets/js/bootstrap-typeahead.js"></script>
+
+    <script>
+        this.loadDiv = function(page) {
+            $('#content').load(page+".html");
+        }
+
+        $(document).ready(function() {
+            loadDiv("Home");
+        });
+    </script>
 </body>  
 </html>  
               

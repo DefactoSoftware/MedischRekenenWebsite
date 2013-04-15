@@ -1,0 +1,45 @@
+<div class="container container-fluid">
+<div class="pull-right"><img class="img-rounded" style="margin: 0px 20px 20px auto; width:100%" src="img/side1.jpg" /></div>
+<h1>Train medisch rekenen</h1>
+
+        <p>Rekenen is niet echt moeilijk, verpleegkundig rekenen kan dat wel zijn omdat er vaak 'vreemde' berekeningen of eenheden in voorkomen.</p>
+        <p>Op deze website kan je op een leuke en makkelijke manier je rekenkunsten testen en trainen. Hieronder zie je de topscores van de afgelopen maand</p>
+
+        <h2>Totale score</h2>
+        <table id="table" class="table" style="width:70%">
+            <thead>
+                <tr>
+                    <th>Speler</th>
+                    <th id="thScore">Score</th>
+                    <th>Tijd</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- ko foreach: scoresViewModel.users() -->
+                <tr>
+                    <td data-bind="text: name"></td>
+                    <td data-bind="text: getTotal()"></td>
+                    <td data-bind="text: getTime()"></td>
+                </tr>
+                <!-- /ko -->
+            </tbody>
+        </table>
+
+</div>
+        <script>
+            $(document).ready(function() {
+               loadScores();
+            });
+        </script>
+
+<!-- Correct Modal -->
+<div id="successModal" class="modal hide fade in" style="display: none; ">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal"><i class=" icon-remove-circle "></i></a>
+        <h3>Sessie voltooid</h3>
+    </div>
+
+    <div class="modal-body">
+        <p>Je sessie is nu voltooid. Je kan nog een sessie starten door in het menu op medisch rekenen te klikken</p>
+    </div>
+</div>
