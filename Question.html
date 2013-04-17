@@ -1,54 +1,50 @@
 <div id="questions" class="container container-fluid">
 
-    <div id="currentScore" style="border-width: 1px; padding:5px; border-style: solid; margin:5px" class="pull-right" >
-        <h3>Score</h3>
-        <table style="width: 100%" class="table">
-            <tr>
-                <td>Naam</td>
-                <td data-bind="text: currentSession.name()">John Doe</td>
-            </tr>
-            <tr>
-                <td>Score</td>
-                <td data-bind="text: currentSession.score()">0</td>
-            </tr>
-            <tr>
-                <td>Tijd</td>
-                <td><span id="minutes" data-bind="text: currentSession.mins()"></span>:<span id="seconds" data-bind="text: currentSession.secs()"></span></td>
-            </tr>
 
-        </table>
-        <button id="stopButton" onclick="sendScore(currentSession)" type="submit" class="btn">Stop sessie</button>
-
-    </div>
     <!-- Main question unit -->
-    <div class="leaderboard" id="currentQuestion" style="width:80%; " >
-        <h1 data-bind="text: currentQuestionView.Question().theory"></h1>
-        <p data-bind="text: currentQuestionView.Question().question"></p>
-        <form class="well form-inline">
-            <div class="input-append input-prepend">
-                <div class="btn-group">
-                    <button class="btn dropdown-toggle" data-toggle="dropdown">
-                        Eenheid
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li onclick="currentQuestionView.setUnit('ml')"><a href="#">Milliliter</a></li>
-                        <li onclick="currentQuestionView.setUnit('cl')"><a href="#">Centiliter</a></li>
-                        <li onclick="currentQuestionView.setUnit('dl')"><a href="#">Deciliter</a></li>
-                        <li onclick="currentQuestionView.setUnit('druppels')"><a href="#">Druppels</a></li>
-                    </ul>
-                </div>
-                <input type="text" size="4" class="input-small" id="antwoord" placeholder="">
-                <span class="add-on" data-bind="text: currentQuestionView.unit()">.00</span>
+    <div class="leaderboard" id="currentQuestion" style="width:100%;"  >
+        <div id="currentScorewrapper" class="pull-right" >
+            <div id="badge-ribbon">
+
+                <br>
+                <h2 id="textAnimate"  style="margin-top: -1%; text-align:center " data-bind="text: currentSession.score()">0</h2>
 
             </div>
-            <button type="submit" class="btn btn-success button-margin" data-toggle="modal" id="antwoordButton">Antwoord</button>
-        </form>
-        <div class="pull-left">
-            <a data-toggle="modal" href="#hint"><button class="btn btn-warning"><i class="icon-question-sign icon-white"></i><b> Hint</b></button></a>
         </div>
-        <div class="pull-right">
-            <button id="skipButton" onclick="getQuestion(1)" type="submit" class="btn btn-danger">Overslaan</button>
+
+        </div>
+        <div>
+
+            <h1 data-bind="text: currentQuestionView.Question().theory"></h1>
+            <p data-bind="text: currentQuestionView.Question().question"></p>
+            <form class="well form-inline" style="max-width:400px" >
+                <div style="display:none" id="goodanswer" class="success"><i class="icon-check"></i><p>Goed antwoord!</p></div>
+                <div class="input-append input-prepend">
+
+                    <div class="btn-group" >
+                        <button class="btn dropdown-toggle" data-toggle="dropdown">
+                            Eenheid
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li onclick="currentQuestionView.setUnit('ml')"><a href="#">Milliliter</a></li>
+                            <li onclick="currentQuestionView.setUnit('cl')"><a href="#">Centiliter</a></li>
+                            <li onclick="currentQuestionView.setUnit('dl')"><a href="#">Deciliter</a></li>
+                            <li onclick="currentQuestionView.setUnit('druppels')"><a href="#">Druppels</a></li>
+                        </ul>
+                    </div>
+                    <input type="text" size="4" class="input-small" id="antwoord" placeholder="">
+                    <span class="add-on" data-bind="text: currentQuestionView.unit()">.00</span>
+
+                </div>
+                <button type="submit" class="btn btn-success button-margin" data-toggle="modal" id="antwoordButton">Antwoord</button>
+            </form>
+            <div class="pull-left">
+                <a data-toggle="modal" href="#hint"><button class="btn btn-warning"><i class="icon-question-sign icon-white"></i><b> Hint</b></button></a>
+            </div>
+            <div class="pull-left" style="margin-left:5px">
+                <button id="skipButton" onclick="getQuestion(1)" type="submit" class="btn btn-danger">Overslaan</button>
+            </div>
         </div>
     </div>
 
@@ -105,23 +101,20 @@
 <div id="sessionModal" class="modal hide fade in" style="display: none">
     <div class="modal-header">
         <a class="close" data-dismiss="modal"><i class=" icon-remove-circle "></i></a>
-        <h3>Start een nieuwe sessie</h3>
+        <h3>Oefenen</h3>
     </div>
 
     <div class="modal-body">
-        <form>
-            <fieldset>
-                <legend>Gebruikersgegevens</legend>
-
-                <label>Naam</label>
-                <input type="text" data-bind="value: currentSession.name" >
-            </fieldset>
-        </form>
+        <fieldset>
+            <legend>Gebruikersgegevens</legend>
+            <label>Naam</label>
+            <input type="text" id="nameInput" data-bind="value: currentSession.name">
+        </fieldset>
     </div>
 
     <div class="modal-footer">
 
-        <a href="#" class="btn btn-warning" onclick="startChr()" data-dismiss="modal">Ga verder</a>
+        <a href="#" class="btn btn-warning" onclick data-dismiss="modal">Ga verder</a>
     </div>
 </div>
 <script src="js/Functions.js"></script>
@@ -134,75 +127,13 @@
 
 
     $(document).ready(function() {
-        $("#sessionModal").modal();
+        if(currentSession.name() == ""){
+            $("#sessionModal").modal();
+            $("#nameInput").focus();
+        }
     });
 
-
-
-    // chronometer / stopwatch JS script - coursesweb.net
-
-    // Here set the minutes, seconds, and tenths-of-second when you want the chronometer to stop
-    // If all these values are set to 0, the chronometer not stop automatically
-    var stmints = 0;
-    var stseconds = 0;
-    var stzecsec = 0;
-
-    // function to be executed when the chronometer stops
-    function toAutoStop() {
-        alert('Your life goes on');
-    }
-
-    // the initial tenths-of-second, seconds, and minutes
-    var zecsec = 0;
-    var seconds = 0;
-    var mints = 0;
-
-    var startchron = 0;
-
-    function chronometer() {
-        if(startchron == 1) {
-            zecsec += 1;       // set tenths of a second
-
-            // set seconds
-            if(zecsec > 9) {
-                zecsec = 0;
-                seconds += 1;
-            }
-
-            // set minutes
-            if(seconds > 59) {
-                seconds = 0;
-                mints += 1;
-            }
-
-            // adds data in #showtm
-            if(mints < 10) {
-                currentSession.mins("0" + mints);
-            }
-            else
-            {
-                currentSession.mins(mints);
-            }
-            if(seconds < 10) {
-                currentSession.secs("0"+seconds);
-            }
-            else
-            {
-                currentSession.secs(seconds);
-            }
-            console.log(seconds);
-            //document.getElementById('showtm').innerHTML = mints+ ' : '+ seconds+ '<sub>'+ zecsec+ '</sub>';
-
-            // if the chronometer reaches to the values for stop, calls whenChrStop(), else, auto-calls chronometer()
-            //if(zecsec == stzecsec && seconds == stseconds && mints == stmints) toAutoStop();
-            setTimeout("chronometer()", 100);
-        }
-    }
-
-    function startChr() { startchron = 1; chronometer(); }      // starts the chronometer
-    function stopChr() { startchron = 0; }                      // stops the chronometer
-    function resetChr() {
-        zecsec = 0;  seconds = 0; mints = 0; startchron = 0;
-        document.getElementById('showtm').innerHTML = mints+ ' : '+ seconds+ '<sub>'+ zecsec+ '</sub>';
-    }
+    window.onbeforeunload = function (e) {
+        sendScore(currentSession);
+    };
 </script>
