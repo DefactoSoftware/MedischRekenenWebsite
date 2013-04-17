@@ -7,15 +7,9 @@ var Question = function(question, answer, hint, theory) {
     this.theory = theory;
 }
 
-var Session = function(name) {
-    this.score = ko.observable(0);
+var Session = function(name, score) {
+    this.score = ko.observable(score);
     this.name = ko.observable(name);
-    this.secs = ko.observable();
-    this.mins = ko.observable();
-
-    this.getTime = ko.computed(function() {
-        return 0;
-    }, this);
 }
 
 var resetQuestion = function(type) {
@@ -33,25 +27,7 @@ var UserModel = function(name) {
         return x;
     }
 
-    this.getTime = function() {
-        var x = 0;
-        for(var i = 0; i< this.time().length; i++) {
-            x = x+this.time()[i];
-        }
-        var hours = Math.floor(x / (60 * 60));
 
-        var divisor_for_minutes = x % (60 * 60);
-        var minutes = Math.floor(divisor_for_minutes / 60);
-
-        var divisor_for_seconds = divisor_for_minutes % 60;
-        var seconds = Math.ceil(divisor_for_seconds);
-
-        if(seconds < 10){ seconds = "0" + seconds;}
-        if(minutes < 10){ minutes = "0" + minutes;}
-        if(hours < 10){ hours = "0" + hours;}
-        return hours+":"+minutes+":"+seconds;
-    }
-    this.time= ko.observableArray([]);
     this.scores = ko.observableArray([]);
     this.name = name;
 
@@ -75,13 +51,14 @@ scoresViewModel = new ScoresViewModel();
 ko.applyBindings(scoresViewModel);
 
 var createSession = function(name) {
-    window.currentSession = new Session(name);
+    var score = getScore(name);
+    window.currentSession = new Session(name, score);
 }
 
 var CurrentQuestionView = function() {
     this.Question = ko.observable(new Question("","",""));
     this.unit = ko.observable("ml");
-
+    this.streak = 0;
     this.setUnit = function(unit) {
         console.log(unit);
         this.unit(unit);
@@ -92,17 +69,30 @@ var CurrentQuestionView = function() {
         var answer = document.getElementById("antwoord").value;
         console.log(answer+this.unit() +" == "+this.Question().answer);
         console.log(answer+this.unit() == this.Question().answer.trim());
-        if(answer+this.unit() == this.Question().answer.trim()) {
-            $("#correct").modal();
-            window.currentSession.score(window.currentSession.score()+1);
+        if(answer+this.unit() == this.Question().answer.trim() || answer.replace('.', ',')+this.unit() == this.Question().answer.trim()) {
+            //$("#correct").modal();
+            animateGoodAnswer();
+            window.currentSession.score(window.currentSession.score()+10);
+            //animateBonus("10", "+")
+            this.streak++;
+            resetQuestion(2);
         }
         else
         {
             $("#false").modal();
+            this.streak = 0;
         }
+        if(this.streak >= 5) {
+            window.currentSession.score(window.currentSession.score()+5);
+            animateBonus("15", "+")
+        }
+
+        $("#antwoord").val("");
+        $("#continueTrueButton").focus();
+        sendScore(currentSession);
     }
 }
 
 
-var currentSession = new Session("");
+var currentSession = new Session("", 0);
 ko.applyBindings(currentSession);
