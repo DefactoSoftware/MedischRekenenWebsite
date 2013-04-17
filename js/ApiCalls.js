@@ -95,37 +95,49 @@ var getQuestionSuccess = function(data) {
     }
 }
 
-var getFBUserName = function(userId) {
-    console.log("tralalala");
-    callService("https://graph.facebook.com/"+userId+"?fields=name", getFBUserNameSuccess);
-}
-
-var getFBUserNameSuccess = function(data) {
-    if(data !== undefined || data != null) {
-        var user = $.parseJSON(data);
-        createSession(user.name);
-    }
+var getScore = function(name, successFunction) {
+    url = mr_db_url+ "collections/scores" + mongo_key + '&q={"name":{"$regex":"'+name+'","$options":"i"}}';
+    callService(url, successFunction);
 }
 
 var sendScore = function (session) {
-    stopChr();
+    getScore(session.name(), updateScore);
+}
+
+var updateScore = function (data) {
+
+    console.log(data.length>0);
     var obj = new Object();
-    obj.name = session.name();
-    obj.score = session.score();
-    console.log($("#minutes").text() + $("#seconds").text());
-    obj.time = (parseInt($("#minutes").text()) * 60) + parseInt($("#seconds").text());
-    console.log(obj.time);
-    if(session !== null || session !== undefined) {
-        console.log(JSON.stringify(session));
+    obj.name = currentSession.name();
+    obj.score = currentSession.score();
+    if(data.length > 0) {
+        putService(mr_db_url + "collections/scores" + mongo_key+ '&q={"name":{"$regex":"'+obj.name+'","$options":"i"}}', obj, sendScoreSuccess);
+    }
+    else
+    {
         postService(mr_db_url + "collections/scores" + mongo_key, obj, sendScoreSuccess)
+    }
+}
+
+var newScoreSession = function(data) {
+    if(!data[0]) {
+        currentSession = new Session(currentSession.name(), 0);
+        return;
+    }
+    if(data[0].name !== undefined) {
+        console.log(data[0]);
+        currentSession = new Session(data[0].name, data[0].score);
+        ko.applyBindings();
+    }
+    else {
+        console.log("noscore");
+        currentSession = new Session(currentSession.name(), 0);
     }
 }
 
 var sendScoreSuccess = function(data) {
     console.log(data);
-    currentSession = new Session();
-    loadDiv("Home");
-
+    getScore(currentSession.name(), newScoreSession);
 }
 
 var loadScores = function() {
