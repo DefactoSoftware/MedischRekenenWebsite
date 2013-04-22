@@ -24,13 +24,11 @@ var Session = function(name, score) {
     this.name = ko.observable(name);
 }
 
-var resetQuestion = function(type) {
-    $("#antwoord").value = "";
-    getQuestion(type);
-}
-
 var UserModel = function(name) {
     this.name = name;
+    if(name === "" || name === undefined){
+        this.name = "John Doe";
+    }
     this.score = ko.observable();
     this.number = ko.observable();
 

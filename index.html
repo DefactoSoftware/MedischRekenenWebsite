@@ -48,11 +48,14 @@
         <div id="content">
             loading....
         </div>
+
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 
     <hr>
     <footer class="container-fluid">
-    <p>© Copyright 2013</p>
+    <div class="pull-right"><a class="keyboard-shortcuts" data-toggle="modal" href="#keyboardShortcutsModal">Shortcuts <img src="img/keyboardicon.png" /></a></div>
+    <div class="pull-left"><p>© Copyright 2013</p></div>
         <div >
             <img width="100%"src="img/FOOTER.png" />
         </div>
@@ -95,6 +98,36 @@
     <script src="twitter-bootstrap-v2/docs/assets/js/bootstrap-typeahead.js"></script>
 
     <script>
+        var switchDevMode = function() {
+            if(mr_api_url.substr(mr_api_url.length-4) === "dev/") {
+                mr_api_url = mr_api_url.substr(0, mr_api_url.length-4);
+                $("#devmode").css("font-style", "normal");
+                $("#devmode").css("color", "black");
+            }
+            else {
+                mr_api_url = mr_api_url + "dev/";
+                $("#devmode").css("font-style", "italic");
+                $("#devmode").css("color", "red");
+            }
+        }
+
+        $("body").bind("keypress", function(event) {
+            if(event.which===115) {
+                if($("#keyboardShortcutsModal").is(":visible")){
+                    $("#keyboardShortcutsModal").modal('hide');
+                    setTimeout(function() {$("#antwoord").focus(); }, 300);
+                } else {
+                    $("#keyboardShortcutsModal").modal();
+                    setTimeout(function() {$(".kbsClose").focus(); }, 300);
+                }
+            }
+            if(event.which === 27) {
+                console.log("esc");
+                $.modal.close();
+            }
+
+        });
+
         this.loadDiv = function(page) {
             $('#content').load(page+".html");
         }

@@ -1,6 +1,6 @@
 <div id="questions" class="container container-fluid">
 
-
+    <a class="keyboard-shortcuts" data-toggle="modal" href="#keyboardShortcutsModal">Shortcuts<img src="img/keyboardicon.png" /></a>
     <!-- Main question unit -->
     <div class="leaderboard" id="currentQuestion" style="width:100%;"  >
         <div id="currentScorewrapper" class="pull-right" >
@@ -55,10 +55,51 @@
 
 </div>
 
-<div id="sessionModal" class="modal hide fade in" style="display: none">
+<div id="keyboardShortcutsModal" class="modal hide fade in modalBorder" style="display: none">
     <div class="modal-header">
         <a class="close" data-dismiss="modal"><i class=" icon-remove-circle "></i></a>
-        <h3>Oefenen</h3>
+        <h3>Keyboard shortcuts</h3>
+    </div>
+
+    <div class="modal-body">
+        <h4>Pagina specifiek</h4>
+        <table>
+            <tr>
+                <td><span class="keyboard-key">+</span></td>
+                <td><span class="keyboard-action">Overslaan</span></td>
+            </tr>
+            <tr>
+                <td><span class="keyboard-key">&#x21a9</span></td>
+                <td><span class="keyboard-action">Antwoord versturen</span></td>
+            </tr>
+            <tr>
+                <td><span class="keyboard-key">?</span> / <span class="keyboard-key">h</span></td>
+                <td><span class="keyboard-action">Hint</span></td>
+            </tr>
+        </table>
+        <table>
+            <h4>Standaard</h4>
+            <tr>
+                <td><span class="keyboard-key">i</span></td>
+                <td><span class="keyboard-action">Instellingen</span></td>
+            </tr>
+            <tr>
+                <td><span class="keyboard-key">s</span></td>
+                <td><span class="keyboard-action">Shortcuts</span></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="modal-footer">
+
+        <a href="#" class="btn btn-success kbsClose" onclick data-dismiss="modal">Ga verder</a>
+    </div>
+</div>
+
+<div id="sessionModal" class="modal hide fade in modalBorder" style="display: none">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal"><i class=" icon-remove-circle "></i></a>
+        <h3>Instellingen</h3>
     </div>
 
     <div class="modal-body">
@@ -71,7 +112,7 @@
 
     <div class="modal-footer">
 
-        <a href="#" class="btn btn-warning" onclick data-dismiss="modal">Ga verder</a>
+        <a href="#" class="btn btn-success" onclick data-dismiss="modal">Ga verder</a>
     </div>
 </div>
 <script src="js/Functions.js"></script>  |
@@ -86,7 +127,8 @@
     $(document).ready(function() {
         if(currentSession.name() == ""){
             $("#sessionModal").modal();
-            $("#nameInput").focus();
+            setTimeout(function() {$("#nameInput").focus(); }, 300);
+
         }
     });
 

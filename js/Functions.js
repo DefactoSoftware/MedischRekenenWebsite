@@ -17,20 +17,9 @@ var skipQuestion = function() {
     bonus('1', '-');
 }
 
-var switchDevMode = function() {
-    if(mr_api_url.substr(mr_api_url.length-4) === "dev/") {
-        mr_api_url = mr_api_url.substr(0, mr_api_url.length-4);
-        $("#devmode").css("font-style", "normal");
-        $("#devmode").css("color", "black");
-    }
-    else {
-        mr_api_url = mr_api_url + "dev/";
-        $("#devmode").css("font-style", "italic");
-        $("#devmode").css("color", "red");
-    }
+var resetQuestion = function(type) {
+    getQuestion(type);
 }
-
-
 
 var bonus = function(amount, sign) {
     animateBonus(amount, sign);
@@ -40,6 +29,11 @@ var bonus = function(amount, sign) {
     else if (sign === '-') {
         setTimeout(function() {currentSession.score(currentSession.score()-parseInt(amount)); sendScore(currentSession); }, 500);
     }
+}
+
+var showHint = function() {
+    animateMessage('#hintMessage', 20000);
+    bonus('1', '-');
 }
 
 
@@ -67,11 +61,15 @@ var animateBonus = function(amount, sign) {
     });
 }
 
-var animateMessage = function(element) {
-    //$(element).html("Goed antwoord!");
+var animateMessage = function(element, time) {
     $(element).hide(0);
     $(element).show(500);
-    setTimeout(function() {$(element).hide(500); }, 5000);
+    if(time > 0) {
+        setTimeout(function() {$(element).hide(500); }, time);
+    }
+    else {
+        setTimeout(function() {$(element).hide(500); }, 5000);
+    }
 }
 
 /*******************************
@@ -98,11 +96,24 @@ $("#nameInput").bind("keypress", function(event) {
 
 $("body").bind("keypress", function(event) {
     console.log(event.which);
-    if(event.which === 61) {
-        if(currentQuestionView != undefined) {
-            console.log("skipping question");
-            skipQuestion();
+    console.log($("#nameInput").is(":focus"));
+    if(!$("#nameInput").is(":focus")){
+        event.preventDefault();
+        if(event.which === 61 || event.which === 43) {
+            if(currentQuestionView != undefined) {
+                console.log("skipping question");
+                skipQuestion();
+            }
         }
+
+        if(event.which === 47 || event.which===104) {
+            showHint();
+        }
+        if(event.which === 105) {
+            $("#sessionModal").modal();
+            setTimeout(function() {$("#nameInput").focus(); }, 300);
+        }
+
     }
 })
 
@@ -111,20 +122,30 @@ $("body").bind("keypress", function(event) {
  *******************************/
 
 $("#skipButton").click(function() {
+    $("#hintMessage").hide();
+    $("#goodanswer").hide();
+    $("#wronganswer").hide();
     skipQuestion();
 });
 
 $("#hintButton").click(function() {
-    animateMessage('#hintMessage');
-    bonus('1', '-');
+    showHint();
 })
 
 $("#antwoordButton").click(function() {
+    $("#hintMessage").hide();
+    $("#goodanswer").hide();
+    $("#wronganswer").hide();
     currentQuestionView.eval();
 })
 
 $('#sessionModal').on('hidden', function () {
+    $("#antwoord").focus();
     getScore(currentSession.name(), newScoreSession);
+});
+
+$('#keyboardShortcutsModal').on('hidden', function () {
+    $("#antwoord").focus();
 });
 
 $("#questions").ready(function() {

@@ -11,11 +11,45 @@
     background-color: #DFF2BF;
 
 }
+.warning {
+    color: #9F6000;
+    background-color: #FEEFB3;
+}
 
 .error {
     color: red;
     background-color: #FF9494;
 
+}
+
+.keyboard-shortcuts {
+    text-decoration: none;
+    color: #999;
+    font-size: 11px;
+}
+
+.keyboard-shortcuts a:hover {
+    text-decoration: none;
+    color: #333333;
+}
+
+.keyboard-key {
+    display: inline-block;
+    margin: 0;
+    padding: 3px 6px;
+    min-width: 10px;
+    text-align: center;
+    font-family: Monaco, "Liberation Mono", Courier, monospace;
+    background: #333;
+    color: #EEE;
+    border-radius: 2px;
+    text-shadow: 1px 1px 0 #000;
+}
+
+.keyboard-action {
+    display: inline;
+    margin: 0 0 0 5px;
+    color: #666;
 }
 
 .info, .success, .warning, .error, .validation {
