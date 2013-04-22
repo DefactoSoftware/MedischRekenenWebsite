@@ -19,8 +19,8 @@
             <p data-bind="text: currentQuestionView.Question().question"></p>
             <form class="well form-inline" style="max-width:400px" >
                 <div style="display:none" id="goodanswer" class="success"><p><i class="icon-ok"></i> Goed antwoord!</p></div>
-                <div style="display:none" id="wronganswer" class="error"><p><i class="icon-exclamation-sign"></i> Dat is fout, het antwoord was <span data-bind="text: currentQuestionView.Question().answer" ></span></p></div>
-                <div style="display:none" id="hintMessage" class="warning"><p><i class="icon-exclamation-sign"></i><span data-bind="text: currentQuestionView.Question().hint" ></span></p></div>
+                <div style="display:none" id="wronganswer" class="error"><p><i class="icon-exclamation-sign"></i> Dat is fout, het antwoord was <span data-bind="text: answerOld()" ></span></p></div>
+                <div style="display:none" id="hintMessage" class="warning"><p><i class="icon-question-sign"></i> <span data-bind="text: currentQuestionView.Question().hint" ></span></p></div>
                 <div class="input-append input-prepend">
 
                     <div class="btn-group" >
@@ -36,7 +36,7 @@
                             <li onclick="currentQuestionView.setUnit('min')"><a href="#">Minuten</a></li>
                         </ul>
                     </div>
-                    <input type="text" size="4" class="input-small" id="antwoord" placeholder="">
+                    <input type="text" size="4" class="input-small" type="number" id="antwoord" placeholder="">
                     <span class="add-on" data-bind="text: currentQuestionView.unit()">.00</span>
 
                 </div>
@@ -115,7 +115,7 @@
         <a href="#" class="btn btn-success" onclick data-dismiss="modal">Ga verder</a>
     </div>
 </div>
-<script src="js/Functions.js"></script>  |
+<script src="js/Functions.js"></script>
 <script>
     var currentQuestionView = new CurrentQuestionView();
 

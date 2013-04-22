@@ -91,6 +91,7 @@ var getQuestionSuccess = function(data) {
         var obj = $.parseJSON(data);
         var q = new Question(obj.question, obj.answer, obj.hint, obj.theory);
         console.log(q);
+        answerOld(currentQuestionView.Question().answer);
         currentQuestionView.Question(q);
     }
 }

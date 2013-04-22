@@ -11,10 +11,21 @@
  *                                                                                                                                                                                                                                   *
  *************************************************************************************************************************************************************************************************************************************/
 
+var clearMessages = function() {
+    $("#hintMessage").hide();
+    $("#goodanswer").hide();
+    $("#wronganswer").hide();
+}
 
 var skipQuestion = function() {
+    clearMessages();
     resetQuestion(Math.floor(Math.random()*6));
     bonus('1', '-');
+}
+
+var answerQuestion = function() {
+    clearMessages();
+    currentQuestionView.eval();
 }
 
 var resetQuestion = function(type) {
@@ -80,7 +91,7 @@ $("#antwoord").bind("keypress", function(event) {
     if(event.which == 13) {
         event.preventDefault();
         if($("#antwoord").val() !== "") {
-            currentQuestionView.eval();
+           answerQuestion();
         }
     }
 });
@@ -98,8 +109,9 @@ $("body").bind("keypress", function(event) {
     console.log(event.which);
     console.log($("#nameInput").is(":focus"));
     if(!$("#nameInput").is(":focus")){
-        event.preventDefault();
+
         if(event.which === 61 || event.which === 43) {
+            event.preventDefault();
             if(currentQuestionView != undefined) {
                 console.log("skipping question");
                 skipQuestion();
@@ -107,9 +119,11 @@ $("body").bind("keypress", function(event) {
         }
 
         if(event.which === 47 || event.which===104) {
+            event.preventDefault();
             showHint();
         }
         if(event.which === 105) {
+            event.preventDefault();
             $("#sessionModal").modal();
             setTimeout(function() {$("#nameInput").focus(); }, 300);
         }
@@ -122,9 +136,6 @@ $("body").bind("keypress", function(event) {
  *******************************/
 
 $("#skipButton").click(function() {
-    $("#hintMessage").hide();
-    $("#goodanswer").hide();
-    $("#wronganswer").hide();
     skipQuestion();
 });
 

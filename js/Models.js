@@ -11,6 +11,7 @@
  *                                                                                                                                                                                                                                   *
  *************************************************************************************************************************************************************************************************************************************/
 
+var answerOld = ko.observable();
 
 var Question = function(question, answer, hint, theory) {
     this.question = question;
@@ -70,11 +71,6 @@ var ScoresViewModel = function() {
 scoresViewModel = new ScoresViewModel();
 ko.applyBindings(scoresViewModel);
 
-var createSession = function(name) {
-    var score = getScore(name);
-    window.currentSession = new Session(name, score);
-}
-
 var CurrentQuestionView = function() {
     this.Question = ko.observable(new Question("","",""));
     this.unit = ko.observable("ml");
@@ -108,7 +104,6 @@ var CurrentQuestionView = function() {
         sendScore(currentSession);
     }
 }
-
 
 var currentSession = new Session("", 0);
 ko.applyBindings(currentSession);
