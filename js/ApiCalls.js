@@ -164,21 +164,17 @@ var loadScoresSuccess = function(data) {
             var x = scoresViewModel.containsUser(data[i].name);
             if(x > 0)
             {
-                scoresViewModel.users()[x].scores().push(data[i].score);
-                if(data[i].time !== null && data[i].time !== undefined) {
-                    scoresViewModel.users()[x].time().push(data[i].time);
-                }
+                scoresViewModel.users()[x].score(data[i].score);
             }
             else
             {
                 var user = new UserModel(data[i].name);
-                user.scores.push(data[i].score);
-                if(data[i].time !== null && data[i].time !== undefined) {
-                    user.time.push(data[i].time);
-                }
+                user.score(data[i].score);
                 scoresViewModel.users().push(user);
             }
         }
+
+        scoresViewModel.sortList();
     }
     ko.applyBindings(scoresViewModel);
 

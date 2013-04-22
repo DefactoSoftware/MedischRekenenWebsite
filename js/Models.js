@@ -20,11 +20,33 @@ var resetQuestion = function(type) {
 var UserModel = function(name) {
     this.name = name;
     this.score = ko.observable();
+    this.number = ko.observable();
 
 }
 
 var ScoresViewModel = function() {
     this.users = ko.observableArray([]);
+
+    this.sortList = function() {
+        for(var i = 0; i< this.users().length; i++) {
+            var min = i;
+
+            for(var x = i+1; x<this.users().length; x++){
+                if(this.users()[x].score() > this.users()[min].score()){
+                    min = x;
+                }
+            }
+            if(i !== min) {
+                var temp = this.users()[min];
+                this.users()[min] = this.users()[i];
+                this.users()[i] = temp;
+            }
+        }
+
+        for(var y = 0; y < this.users().length; y++){
+            this.users()[y].number(y+1);
+        }
+    }
 
     this.containsUser = function(name) {
         for(var i = 0; i< this.users().length; i++) {

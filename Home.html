@@ -3,21 +3,24 @@
 <h1>Train medisch rekenen</h1>
 
         <p>Rekenen is niet echt moeilijk, verpleegkundig rekenen kan dat wel zijn omdat er vaak 'vreemde' berekeningen of eenheden in voorkomen.</p>
-        <p>Op deze website kan je op een leuke en makkelijke manier je rekenkunsten testen en trainen. Hieronder zie je de topscores van de afgelopen maand</p>
+        <p>Op deze website kan je op een leuke en makkelijke manier je rekenkunsten testen en trainen. Hieronder zie je totale scores van alle spelers</p>
 
         <h2>Totale score</h2>
         <table id="table" class="table" style="width:70%">
             <thead>
                 <tr>
+                    <th>#</th>
                     <th>Speler</th>
                     <th id="thScore">Score</th>
+
                 </tr>
             </thead>
             <tbody>
                 <!-- ko foreach: scoresViewModel.users() -->
                 <tr>
+                    <td data-bind="text: number()"></td>
                     <td data-bind="text: name"></td>
-                    <td data-bind="text: getTotal()"></td>
+                    <td data-bind="text: score()"></td>
                 </tr>
                 <!-- /ko -->
             </tbody>
@@ -29,15 +32,3 @@
                loadScores();
             });
         </script>
-
-<!-- Correct Modal -->
-<div id="successModal" class="modal hide fade in" style="display: none; ">
-    <div class="modal-header">
-        <a class="close" data-dismiss="modal"><i class=" icon-remove-circle "></i></a>
-        <h3>Sessie voltooid</h3>
-    </div>
-
-    <div class="modal-body">
-        <p>Je sessie is nu voltooid. Je kan nog een sessie starten door in het menu op medisch rekenen te klikken</p>
-    </div>
-</div>
