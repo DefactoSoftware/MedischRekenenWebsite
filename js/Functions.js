@@ -1,14 +1,15 @@
 $("#skipButton").click(function() {
-    getQuestion(1);
+    resetQuestion(Math.floor(Math.random()*6));
     animateBonus("1", "-")
     currentSession.score(currentSession.score()-1)
 });
 
 $('#false').on('hidden', function () {
-    resetQuestion(1);
+    resetQuestion(Math.floor(Math.random()*6));
 });
-$('#correct').on('hidden', function () {
-    resetQuestion(2);
+
+$('#hint').on('hidden', function() {
+    animateBonus("1", "-");
 });
 
 $('#sessionModal').on('hidden', function () {
@@ -22,7 +23,20 @@ $("#antwoord").bind("keypress", function(event) {
             currentQuestionView.eval();
         }
     }
-})
+});
+
+var switchDevMode = function() {
+    if(mr_api_url.substr(mr_api_url.length-4) === "dev/") {
+        mr_api_url = mr_api_url.substr(0, mr_api_url.length-4);
+        $("#devmode").css("font-style", "normal");
+        $("#devmode").css("color", "black");
+    }
+    else {
+        mr_api_url = mr_api_url + "dev/";
+        $("#devmode").css("font-style", "italic");
+        $("#devmode").css("color", "red");
+    }
+}
 
 var animateGoodAnswer = function() {
     $('#goodanswer').html("Goed antwoord!");
@@ -65,7 +79,6 @@ $("#nameInput").bind("keypress", function(event) {
 });
 
 $("#antwoordButton").click(function() {
-    console.log("CLICK ANTWOORD");
     currentQuestionView.eval();
 })
 

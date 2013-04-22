@@ -18,20 +18,8 @@ var resetQuestion = function(type) {
 }
 
 var UserModel = function(name) {
-
-    this.getTotal = function(){
-        var x = 0;
-        for(var i = 0; i< this.scores().length; i++) {
-            x = x+this.scores()[i];
-        }
-        return x;
-    }
-
-
-    this.scores = ko.observableArray([]);
     this.name = name;
-
-
+    this.score = ko.observable();
 
 }
 
@@ -75,7 +63,7 @@ var CurrentQuestionView = function() {
             window.currentSession.score(window.currentSession.score()+10);
             //animateBonus("10", "+")
             this.streak++;
-            resetQuestion(2);
+            resetQuestion(Math.floor(Math.random()*6));
         }
         else
         {
