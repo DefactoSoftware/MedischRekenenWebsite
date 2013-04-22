@@ -18,7 +18,9 @@
             <h1 data-bind="text: currentQuestionView.Question().theory"></h1>
             <p data-bind="text: currentQuestionView.Question().question"></p>
             <form class="well form-inline" style="max-width:400px" >
-                <div style="display:none" id="goodanswer" class="success"><i class="icon-check"></i><p>Goed antwoord!</p></div>
+                <div style="display:none" id="goodanswer" class="success"><p><i class="icon-ok"></i> Goed antwoord!</p></div>
+                <div style="display:none" id="wronganswer" class="error"><p><i class="icon-exclamation-sign"></i> Dat is fout, het antwoord was <span data-bind="text: currentQuestionView.Question().answer" ></span></p></div>
+                <div style="display:none" id="hintMessage" class="warning"><p><i class="icon-exclamation-sign"></i><span data-bind="text: currentQuestionView.Question().hint" ></span></p></div>
                 <div class="input-append input-prepend">
 
                     <div class="btn-group" >
@@ -41,62 +43,16 @@
                 <button type="submit" class="btn btn-success button-margin" data-toggle="modal" id="antwoordButton">Antwoord</button>
             </form>
             <div class="pull-left">
-                <a data-toggle="modal" href="#hint"><button class="btn btn-warning"><i class="icon-question-sign icon-white"></i><b> Hint</b></button></a>
+                <a id="hintButton" href="#"><button class="btn btn-warning"><i class="icon-question-sign icon-white"></i><b> Hint</b></button></a>
             </div>
             <div class="pull-left" style="margin-left:5px">
-                <button id="skipButton" onclick="getQuestion(1)" type="submit" class="btn btn-danger">Overslaan</button>
+                <button id="skipButton" type="submit" class="btn btn-danger">Overslaan</button>
             </div>
         </div>
     </div>
 
     <div style="clear:both"></div>
 
-</div>
-<!-- Correct Modal -->
-<div id="correct" class="modal hide fade in" style="display: none; ">
-    <div class="modal-header">
-        <a class="close" data-dismiss="modal"><i class=" icon-remove-circle "></i></a>
-        <h3>Dat klopt</h3>
-    </div>
-
-    <div class="modal-body">
-        <p>Je moet <span data-bind="text: currentQuestionView.Question().answer"></span> injecteren</p>
-    </div>
-
-    <div class="modal-footer">
-        <a data-dismiss="modal" id="continueTrueButton" class="btn btn-success">Ga verder</a>
-    </div>
-</div>
-<!-- False Modal -->
-<div id="false" class="modal hide fade in" style="display: none; ">
-    <div class="modal-header">
-        <a class="close" data-dismiss="modal"><i class=" icon-remove-circle "></i></a>
-        <h3>Dat is fout...</h3>
-    </div>
-
-    <div class="modal-body">
-        <p>Je moet <span data-bind="text: currentQuestionView.Question().answer"></span> injecteren</p>
-    </div>
-
-    <div class="modal-footer">
-        <a data-dismiss="modal" id="continueFalseButton" class="btn btn-danger">Ga verder</a>
-    </div>
-</div>
-<!-- Hint Modal -->
-<div id="hint" class="modal hide fade in" style="display: none; ">
-    <div class="modal-header">
-        <a class="close" data-dismiss="modal"><i class=" icon-remove-circle "></i></a>
-        <h3>Hint</h3>
-    </div>
-
-    <div class="modal-body">
-        <p data-bind="text: currentQuestionView.Question().hint">Bereken eerst welk deel van de werkzame stof in de ampul je moet gebruiken</p>
-
-    </div>
-
-    <div class="modal-footer">
-        <a href="#" class="btn btn-warning" data-dismiss="modal">Ga verder</a>
-    </div>
 </div>
 
 <div id="sessionModal" class="modal hide fade in" style="display: none">
@@ -118,7 +74,7 @@
         <a href="#" class="btn btn-warning" onclick data-dismiss="modal">Ga verder</a>
     </div>
 </div>
-<script src="js/Functions.js"></script>
+<script src="js/Functions.js"></script>  |
 <script>
     var currentQuestionView = new CurrentQuestionView();
 

@@ -1,29 +1,21 @@
-$("#skipButton").click(function() {
+/*************************************************************************************************************************************************************************************************************************************
+ *                                                                                                                                                                                                                                   *
+ *                                                                                                                                                                                                                                   *
+ *    FUNCTIONS                                                                                                                                                                                                                      *
+ *                                                                                                                                                                                                                                   *
+ *    Animation and the binding of keypress and click events                                                                                                                                                                         *
+ *                                                                                                                                                                                                                                   *
+ *                                                                                                                                                                                                                                   *
+ *    Author: Marthyn Olthof                                                                                                                                                                                                         *
+ *    (c) Defacto Automatisering 2013 - 2113                                                                                                                                                                                         *
+ *                                                                                                                                                                                                                                   *
+ *************************************************************************************************************************************************************************************************************************************/
+
+
+var skipQuestion = function() {
     resetQuestion(Math.floor(Math.random()*6));
-    animateBonus("1", "-")
-    currentSession.score(currentSession.score()-1)
-});
-
-$('#false').on('hidden', function () {
-    resetQuestion(Math.floor(Math.random()*6));
-});
-
-$('#hint').on('hidden', function() {
-    animateBonus("1", "-");
-});
-
-$('#sessionModal').on('hidden', function () {
-   getScore(currentSession.name(), newScoreSession);
-});
-
-$("#antwoord").bind("keypress", function(event) {
-    if(event.which == 13) {
-        event.preventDefault();
-        if($("#antwoord").val() !== "") {
-            currentQuestionView.eval();
-        }
-    }
-});
+    bonus('1', '-');
+}
 
 var switchDevMode = function() {
     if(mr_api_url.substr(mr_api_url.length-4) === "dev/") {
@@ -38,20 +30,29 @@ var switchDevMode = function() {
     }
 }
 
-var animateGoodAnswer = function() {
-    $('#goodanswer').html("Goed antwoord!");
-    $('#goodanswer').show(500);
-    setTimeout(function() {$('#goodanswer').hide(500); }, 2000);
 
+
+var bonus = function(amount, sign) {
+    animateBonus(amount, sign);
+    if(sign === '+') {
+        setTimeout(function() {currentSession.score(currentSession.score()+parseInt(amount)); sendScore(currentSession); }, 500);
+    }
+    else if (sign === '-') {
+        setTimeout(function() {currentSession.score(currentSession.score()-parseInt(amount)); sendScore(currentSession); }, 500);
+    }
 }
 
+
+/*******************************
+ *     Animation               *
+ *******************************/
 var animateBonus = function(amount, sign) {
     $('#textAnimate').html(sign+" "+amount);
 
     $('#textAnimate').animate({
         opacity: 'toggle'
     }, {
-        duration: 1200,
+        duration: 300,
         complete: function() {
         }
     });
@@ -64,10 +65,27 @@ var animateBonus = function(amount, sign) {
             height: 'linear'
         }
     });
-
-
 }
 
+var animateMessage = function(element) {
+    //$(element).html("Goed antwoord!");
+    $(element).hide(0);
+    $(element).show(500);
+    setTimeout(function() {$(element).hide(500); }, 5000);
+}
+
+/*******************************
+ *     Key press bindings      *
+ *******************************/
+
+$("#antwoord").bind("keypress", function(event) {
+    if(event.which == 13) {
+        event.preventDefault();
+        if($("#antwoord").val() !== "") {
+            currentQuestionView.eval();
+        }
+    }
+});
 
 $("#nameInput").bind("keypress", function(event) {
     if(event.which == 13) {
@@ -78,10 +96,36 @@ $("#nameInput").bind("keypress", function(event) {
     }
 });
 
+$("body").bind("keypress", function(event) {
+    console.log(event.which);
+    if(event.which === 61) {
+        if(currentQuestionView != undefined) {
+            console.log("skipping question");
+            skipQuestion();
+        }
+    }
+})
+
+/*******************************
+ *     Click bindings      *
+ *******************************/
+
+$("#skipButton").click(function() {
+    skipQuestion();
+});
+
+$("#hintButton").click(function() {
+    animateMessage('#hintMessage');
+    bonus('1', '-');
+})
+
 $("#antwoordButton").click(function() {
     currentQuestionView.eval();
 })
 
+$('#sessionModal').on('hidden', function () {
+    getScore(currentSession.name(), newScoreSession);
+});
 
 $("#questions").ready(function() {
     //

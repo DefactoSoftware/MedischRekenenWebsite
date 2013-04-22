@@ -1,3 +1,15 @@
+/*************************************************************************************************************************************************************************************************************************************
+ *                                                                                                                                                                                                                                   *
+ *                                                                                                                                                                                                                                   *
+ *    MODELS                                                                                                                                                                                                                         *
+ *                                                                                                                                                                                                                                   *
+ *    In this class you will find data models and view models.                                                                                                                                                                       *
+ *                                                                                                                                                                                                                                   *
+ *                                                                                                                                                                                                                                   *
+ *    Author: Marthyn Olthof                                                                                                                                                                                                         *
+ *    (c) Defacto Automatisering 2013 - 2113                                                                                                                                                                                         *
+ *                                                                                                                                                                                                                                   *
+ *************************************************************************************************************************************************************************************************************************************/
 
 
 var Question = function(question, answer, hint, theory) {
@@ -70,31 +82,27 @@ var CurrentQuestionView = function() {
     this.unit = ko.observable("ml");
     this.streak = 0;
     this.setUnit = function(unit) {
-        console.log(unit);
         this.unit(unit);
     }
 
     this.eval = function() {
-        console.log("evaluating answer");
+        console.log("Evaluating answer");
         var answer = document.getElementById("antwoord").value;
-        console.log(answer+this.unit() +" == "+this.Question().answer);
-        console.log(answer+this.unit() == this.Question().answer.trim());
         if(answer+this.unit() == this.Question().answer.trim() || answer.replace('.', ',')+this.unit() == this.Question().answer.trim()) {
-            //$("#correct").modal();
-            animateGoodAnswer();
+            animateMessage("#goodanswer");
             window.currentSession.score(window.currentSession.score()+10);
-            //animateBonus("10", "+")
             this.streak++;
             resetQuestion(Math.floor(Math.random()*6));
         }
         else
         {
-            $("#false").modal();
+            animateMessage("#wronganswer");
+            resetQuestion(Math.floor(Math.random()*6));
             this.streak = 0;
         }
         if(this.streak >= 5) {
             window.currentSession.score(window.currentSession.score()+5);
-            animateBonus("15", "+")
+            bonus("15", "+")
         }
 
         $("#antwoord").val("");

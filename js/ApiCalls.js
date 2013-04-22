@@ -81,12 +81,12 @@ var ajaxError = function(data) {
 };
 
 var getQuestion = function(type) {
-    console.log("Getting question");
+    console.log("Loading question");
     this.callService(mr_api_url + "question/" + type, getQuestionSuccess);
 }
 
 var getQuestionSuccess = function(data) {
-    console.log(data)
+    console.log("Question loaded");
     if(data !== null) {
         var obj = $.parseJSON(data);
         var q = new Question(obj.question, obj.answer, obj.hint, obj.theory);
@@ -105,7 +105,6 @@ var sendScore = function (session) {
 }
 
 var updateScore = function (data) {
-
     console.log(data.length>0);
     var obj = new Object();
     obj.name = currentSession.name();
@@ -125,7 +124,6 @@ var newScoreSession = function(data) {
         return;
     }
     if(data[0].name !== undefined) {
-        console.log(data[0]);
         currentSession = new Session(data[0].name, data[0].score);
         ko.applyBindings();
     }
@@ -136,7 +134,7 @@ var newScoreSession = function(data) {
 }
 
 var sendScoreSuccess = function(data) {
-    console.log(data);
+    console.log("Score sent to server");
     getScore(currentSession.name(), newScoreSession);
 }
 
@@ -144,21 +142,8 @@ var loadScores = function() {
     callService(mr_db_url + "collections/scores" + mongo_key, loadScoresSuccess);
 }
 
-var sorteer = function dynamicSort(property) {
-    var sortOrder = 1;
-    if(property[0] === "-") {
-        sortOrder = -1;
-        property = property.substr(1, property.length - 1);
-    }
-    return function (a,b) {
-        var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
-        return result * sortOrder;
-    }
-}
-
 var loadScoresSuccess = function(data) {
     if(data !== null || data !== undefined) {
-        console.log(data);
         scoresViewModel.users.removeAll();
         for(var i = 0; i < data.length; i++) {
             var x = scoresViewModel.containsUser(data[i].name);
@@ -173,10 +158,8 @@ var loadScoresSuccess = function(data) {
                 scoresViewModel.users().push(user);
             }
         }
-
         scoresViewModel.sortList();
     }
     ko.applyBindings(scoresViewModel);
-
-
+    console.log("Scores loaded");
 }
