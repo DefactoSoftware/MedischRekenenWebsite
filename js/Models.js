@@ -86,17 +86,18 @@ var CurrentQuestionView = function() {
             animateMessage("#goodanswer");
             window.currentSession.score(window.currentSession.score()+10);
             this.streak++;
-            resetQuestion(Math.floor(Math.random()*6));
+            resetQuestion(Math.floor(Math.random()*4));
         }
         else
         {
             animateMessage("#wronganswer");
-            resetQuestion(Math.floor(Math.random()*6));
+            resetQuestion(Math.floor(Math.random()*4));
             this.streak = 0;
         }
         if(this.streak >= 5) {
             window.currentSession.score(window.currentSession.score()+5);
             bonus("15", "+")
+            this.streak = 0;
         }
 
         $("#antwoord").val("");

@@ -19,7 +19,7 @@ var clearMessages = function() {
 
 var skipQuestion = function() {
     clearMessages();
-    resetQuestion(Math.floor(Math.random()*6));
+    resetQuestion(Math.floor(Math.random()*4));
     bonus('1', '-');
 }
 
