@@ -49,13 +49,16 @@
             loading....
         </div>
 
-
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 
     <hr>
     <footer class="container-fluid">
+    <!--<div id="audio"></div>-->
+   <div id="audioinput"></div>
+        
     <div class="pull-right"><a class="keyboard-shortcuts" data-toggle="modal" href="#keyboardShortcutsModal">Shortcuts <img src="img/keyboardicon.png" /></a></div>
-    <div class="pull-left"><p>© Copyright 2013</p></div>
+    <div class="pull-left"><a href="sw.html"><p><i  class="icon-star"></i> </a> © Copyright 2013</p></div>
         <div >
             <img style="width:100%" src="img/FOOTER.png" />
         </div>
@@ -71,16 +74,17 @@
             <abbr title="Mail">E:</abbr> info@defacto.nl<br>
         </div>
     </address>
-    <audio id="audio" data-bind="attr: { src: musicModel.soundSrc() }" style="display:none"></audio>"
+    
     </footer>
     <!-- Le javascript -->
     <script src="http://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
     <script src="http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js"></script>
+    <script src="js/Sound.js"></script>
     <script src="js/Models.js"></script>
     <script src="js/ApiCalls.js"></script>
-
-
-
+    
+    <script src="js/jquery.simplyscroll.min.js"></script>
+    
 
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="twitter-bootstrap-v2/docs/assets/js/jquery.js"></script>
@@ -128,7 +132,8 @@
 
         });
 
-        this.loadDiv = function(page) {
+        this.loadDiv = function (page) {
+            
             $('#content').load(page+".html");
         }
 
@@ -136,6 +141,7 @@
             loadDiv("Home");
         });
     </script>
+   
 </body>  
 </html>  
               

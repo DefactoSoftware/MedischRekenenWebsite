@@ -84,12 +84,14 @@ var CurrentQuestionView = function() {
         var answer = document.getElementById("antwoord").value;
         if(answer+this.unit() == this.Question().answer.trim() || answer.replace('.', ',')+this.unit() == this.Question().answer.trim()) {
             animateMessage("#goodanswer");
+            play("goodanswer" + (Math.floor(Math.random()*3)+1));
             window.currentSession.score(window.currentSession.score()+10);
             this.streak++;
             resetQuestion(Math.floor(Math.random()*4));
         }
         else
         {
+            play("wrong1");
             animateMessage("#wronganswer");
             resetQuestion(Math.floor(Math.random()*4));
             this.streak = 0;
@@ -97,6 +99,7 @@ var CurrentQuestionView = function() {
         if(this.streak >= 5) {
             window.currentSession.score(window.currentSession.score()+5);
             bonus("15", "+")
+            setTimeout(function () { play("streak") }, 100)
             this.streak = 0;
         }
 

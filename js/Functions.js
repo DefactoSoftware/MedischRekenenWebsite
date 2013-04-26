@@ -21,6 +21,7 @@ var skipQuestion = function() {
     clearMessages();
     resetQuestion(Math.floor(Math.random()*4));
     bonus('1', '-');
+    play("wrong1.mp3");
 }
 
 var answerQuestion = function() {
@@ -151,6 +152,7 @@ $("#antwoordButton").click(function() {
 })
 
 $('#sessionModal').on('hidden', function () {
+    play("start");
     $("#antwoord").focus();
     getScore(currentSession.name(), newScoreSession);
 });
