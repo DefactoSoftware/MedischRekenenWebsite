@@ -74,7 +74,8 @@ ko.applyBindings(scoresViewModel);
 var CurrentQuestionView = function() {
     this.Question = ko.observable(new Question("","",""));
     this.unit = ko.observable("ml");
-    this.streak = 0;
+    this.streak = ko.observable(0);
+    this.streakCount = 0;
     this.setUnit = function(unit) {
         this.unit(unit);
     }
@@ -86,7 +87,8 @@ var CurrentQuestionView = function() {
             animateMessage("#goodanswer");
             play("goodanswer" + (Math.floor(Math.random()*3)+1));
             window.currentSession.score(window.currentSession.score()+10);
-            this.streak++;
+            this.streak(this.streak()+1);
+            this.streakCount++;
             resetQuestion(Math.floor(Math.random()*4));
         }
         else
@@ -94,13 +96,14 @@ var CurrentQuestionView = function() {
             play("wrong1");
             animateMessage("#wronganswer");
             resetQuestion(Math.floor(Math.random()*4));
-            this.streak = 0;
+            this.streak(0);
+            this.streakCount = 0;
         }
-        if(this.streak >= 5) {
+        if(this.streakCount >= 5) {
             window.currentSession.score(window.currentSession.score()+5);
             bonus("15", "+")
             setTimeout(function () { play("streak") }, 100)
-            this.streak = 0;
+            this.streakCount = 0;
         }
 
         $("#antwoord").val("");
